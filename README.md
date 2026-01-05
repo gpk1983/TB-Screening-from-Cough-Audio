@@ -40,21 +40,15 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 - Reproducibility notes
 
   - All splits are grouped by speaker to prevent leakage.
-
   - Probability calibration is fit using OOF predictions within each outer fold.
-
   - Threshold selection and conformal quantiles are computed using a disjoint CP-calibration subset.
-
   - The outer test fold is used only for final evaluation.
 
 ---
 
 - Limitations
-
   - This is a baseline: it prioritizes clarity and comparability over maximal performance.
-
   - Cough audio is sensitive to device/environment variability; domain shift is not fully addressed here.
-
   - Conformal guarantees rely on exchangeability; speaker-level evaluation is the most deployment-faithful view.
 
 ---
