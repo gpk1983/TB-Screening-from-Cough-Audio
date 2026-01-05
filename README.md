@@ -49,6 +49,16 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 ---
 
+- Limitations
+
+  - This is a baseline: it prioritizes clarity and comparability over maximal performance.
+
+  - Cough audio is sensitive to device/environment variability; domain shift is not fully addressed here.
+
+  - Conformal guarantees rely on exchangeability; speaker-level evaluation is the most deployment-faithful view.
+
+---
+
 If you use this repository, please cite the accompanying paper (BibTeX to be added once available):
 
 @article{TODO,
