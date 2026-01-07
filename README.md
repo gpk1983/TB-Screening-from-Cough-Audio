@@ -15,7 +15,7 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 - **Feature extraction**
   - Acoustic features from cough (e.g., MFCC-based and spectral descriptors, pooled via summary statistics)
-  - Optional clinical variables (routine patient inputs; parsed and imputed)
+  - Acoustic features fused with clinical variables (routine patient inputs; parsed and imputed)
 
 - **Speaker-independent evaluation**
   - Outer CV: **10-fold StratifiedGroupKFold** (grouped by speaker/subject)
