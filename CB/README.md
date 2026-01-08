@@ -55,8 +55,8 @@ We use the **same** splitting strategy as in LR:
    - stratify by cougher’s majority label,
    - retry seeds until both classes exist in both partitions.
    - used for:
-     - threshold selection (Youden \(\tau\)),
-     - conformal quantiles \(q̂(\alpha)\).
+     - threshold selection (Youden $\tau$),
+     - conformal quantiles $q̂(\alpha)$.
 
 3. **Inner 5-fold stratified grouped CV** on the remaining coughers:
    - used for hyperparameter selection.
@@ -88,8 +88,8 @@ Even though CatBoost can be trained with many internal objectives, **our selecti
 - For each candidate hyperparameter setting:
   - train on inner-train coughers,
   - predict probabilities on inner-validation coughers,
-  - compute **fold-specific Youden threshold** \(\tau\),
-  - compute **UAR** at \(\tau\),
+  - compute **fold-specific Youden threshold** $\tau$,
+  - compute **UAR** at $\tau$,
   - average UAR across inner folds → choose the setting with best mean UAR.
 
 This mirrors the LR selection procedure and prioritizes a balanced sensitivity/specificity trade‑off under class imbalance.
@@ -100,10 +100,10 @@ This mirrors the LR selection procedure and prioritizes a balanced sensitivity/s
 
 After selecting the best CatBoost hyperparameters, we calibrate probabilities with **isotonic regression** using **OOF predictions** from the proper training pool:
 
-1. Generate out-of-fold probabilities \(p_i^{\text{OOF}}\) (each sample scored by a model that did not train on it).
+1. Generate out-of-fold probabilities $p_i^{\text{OOF}}$ (each sample scored by a model that did not train on it).
 2. Fit isotonic regression:
 
-   $p^{\text{cal}} = f_{\text{iso}}(p^{\text{raw}}).$
+   $p^{\text{cal}} = f_{\text{iso}}(p^{\text{raw}})$
    
 3. Refit CatBoost on the full proper training pool with best hyperparameters.
 4. Apply isotonic mapping to:
@@ -118,8 +118,8 @@ This ensures calibration is **leakage-free**.
 
 Thresholds are chosen **after calibration** and **only** on the CP-calibration subset:
 
-- waveform-level threshold \(\tau_w\) on per-recording probabilities,
-- cougher-level threshold \(\tau_s\) after aggregating recordings per cougher.
+- waveform-level threshold $\tau_w$ on per-recording probabilities,
+- cougher-level threshold $\tau_s$ after aggregating recordings per cougher.
 
 ---
 
@@ -140,13 +140,13 @@ As with LR, we use inductive conformal prediction with:
 
 $s(\mathbf{x}, y) = 1 - \hat{p}^{\text{cal}}(y \mid \mathbf{x})$
 
-and quantiles \(q̂(\alpha)\) computed on the CP-calibration subset.
+and quantiles $q̂(\alpha)$ computed on the CP-calibration subset.
 
 Prediction sets are:
 
-$\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} \;:\; 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}$
+$\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} : 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}$
 
-We report coverage, set size, and singleton rate (commonly for \(\alpha=0.10\) and \(\alpha=0.05\)), primarily **at cougher level**.
+We report coverage, set size, and singleton rate (commonly for $\alpha=0.10$ and $\alpha=0.05$), primarily **at cougher level**.
 
 ---
 
