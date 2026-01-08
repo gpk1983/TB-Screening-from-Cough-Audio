@@ -154,7 +154,7 @@ $s(\mathbf{x}, y) = 1 - \hat{p}^{\text{cal}}(y \mid \mathbf{x})$
 
 On the **CP-calibration subset** we compute $q̂(\alpha)$, the $(1-\alpha)$-quantile of scores.
 
-For a new test example \(\mathbf{x}\), the prediction set is:
+For a new test example $\mathbf{x}$, the prediction set is:
 
 $\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} : 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}$
 
