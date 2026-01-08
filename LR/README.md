@@ -99,7 +99,7 @@ Inside **each inner fold**:
    
    $\tau = \arg\max_t \left(\mathrm{TPR}(t) - \mathrm{FPR}(t)\right)$
    
-4. Compute **UAR (balanced accuracy)** *at that $\tau$*.
+4. Compute **UAR (balanced accuracy)** at that $\tau$.
 5. Average UAR across inner folds → select the hyperparameters that maximize **mean UAR**.
 
 This aligns model selection with the **screening objective** (balanced sensitivity/specificity under class imbalance).  
